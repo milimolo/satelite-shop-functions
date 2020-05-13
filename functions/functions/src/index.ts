@@ -1,12 +1,34 @@
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-const functions = require('firebase-functions');
+import * as admin from 'firebase-admin';
+const serviceAccount = require("../secret.json");
+import * as functions from 'firebase-functions';
+import {DependencyFactory} from './dependency-factory';
+const difa = new DependencyFactory()
 
-// The Firebase Admin SDK to access the Firebase Realtime Database.
-const admin = require('firebase-admin');
-admin.initializeApp();
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://satelite-database.firebaseio.com"
+});
+
+exports.addOrderRemovesStock = functions.firestore
+  .document('orders/{orderId}')
+  .onCreate((snap, context) => {
+    return difa.getOrderController().placeOrder(snap, context);
+  });
+
+exports.productWritten = functions.firestore
+  .document('products/{id}')
+  .onWrite((snap, context) => {
+    return difa.getProductController().writtenProducts(snap, context);
+  });
+
+exports.topProductUpdated = functions.firestore
+  .document('top-products/{id}')
+  .onUpdate((snap, context) => {
+    return difa.getProductController().updatedTopProduct(snap, context)
+  });
+
+exports.setStockOnNewProducts = functions.firestore
+  .document('products/{id}')
+  .onCreate((snapshot, context) => {
+    return difa.getProductController().create(snapshot, context);
+  })
