@@ -12,7 +12,7 @@ export class OrderService{
       throw new TypeError('You need an order line to execute an order');
     }
     console.log('order', order);
-    this.stockRepo.lowerStock(order.orderLines[0].product, order.orderLines[0].amount).then();
+    this.stockRepo.lowerStock(order.orderLines[0].product, order.orderLines[0].amount).catch(err => console.log("Something went wrong" + err));
     return Promise.resolve(order);
   }
 }

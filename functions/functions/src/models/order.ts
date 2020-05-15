@@ -1,6 +1,6 @@
-import {Orderline} from './orderline';
+import {Orderline} from './orderLine';
 
 export interface Order {
-  id: string;
   orderLines: Orderline[];
+  totalPrice: number;
 }

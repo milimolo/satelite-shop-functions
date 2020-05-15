@@ -1,4 +1,4 @@
-import {Product} from "../models/product";
+import {Product} from "../models/products/product";
 import {Stock} from "../models/stock";
 
 export interface StockRepository {
