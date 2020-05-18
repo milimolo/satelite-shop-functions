@@ -12,5 +12,10 @@ admin.initializeApp({
 exports.addOrderRemovesStock = functions.firestore
   .document('Orders/{orderId}')
   .onCreate((snap, context) => {
-    return difa.getOrderController().placeOrder(snap, context);
+    return difa.getOrderController().removeStock(snap, context);
+  });
+exports.createStockOnNewProducts = functions.firestore
+  .document('Satellites/{id}')
+  .onCreate((snapshot, context) => {
+    return difa.getProductController().create(snapshot, context);
   });

@@ -1,6 +1,6 @@
-import {Product} from "./products/product";
-
 export interface Stock {
+  productId: string;
   count: number;
-  product: Product;
+  model: string;
+  brand: string;
 }
