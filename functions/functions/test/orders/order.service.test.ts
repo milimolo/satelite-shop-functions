@@ -1,7 +1,7 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import {IMock, Times} from "moq.ts";
 import {OrderService} from "../../src/orders/order.service";
-import {TestHelper} from "../helpers/helper";
+import {TestHelper} from "../helpers/test.helper";
 import {OrderRepository} from "../../src/orders/order.repository";
 import {StockRepository} from "../../src/stock/stock.repository";
 

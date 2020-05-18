@@ -57,8 +57,9 @@ export class TestHelper {
 
     order1: Order = {
         orderLines: [{
-            product: this.getProduct1(),
-            amount: 1
+          product: this.getProduct1(),
+          amount: 1,
+          totalPrice: 1000
         }],
         totalPrice: 1000
     };

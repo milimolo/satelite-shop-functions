@@ -1,8 +1,9 @@
 import {ProductRepository} from '../../src/products/product.repository';
 import {ProductService} from '../../src/products/product.service';
 import {StockRepository} from "../../src/stock/stock.repository";
-import {TestHelper} from "../helpers/helper";
+import {TestHelper} from "../helpers/test.helper";
 import {IMock, Mock} from 'moq.ts';
+import {Stock} from "../../src/models/stock";
 
 describe('ProductService', () => {
   let testHelper: TestHelper;
@@ -18,8 +19,8 @@ describe('ProductService', () => {
 
   it('When making new product, it should make a stock document for the product.', async () => {
     const product = testHelper.getProduct1();
-    const stock = productService.createStock(product);
-    
+    const stock = await productService.createStock(product);
+    expect(stock).toBeDefined();
   });
 
 
