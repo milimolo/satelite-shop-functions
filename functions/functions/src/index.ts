@@ -14,8 +14,13 @@ exports.addOrderRemovesStock = functions.firestore
   .onCreate((snap, context) => {
     return difa.getOrderController().removeStock(snap, context);
   });
-exports.createStockOnNewProducts = functions.firestore
+exports.createStockOnNewSatellites = functions.firestore
   .document('Satellites/{id}')
+  .onCreate((snapshot, context) => {
+    return difa.getProductController().create(snapshot, context);
+  });
+exports.createStockOnNewFuel = functions.firestore
+  .document('Fuel/{id}')
   .onCreate((snapshot, context) => {
     return difa.getProductController().create(snapshot, context);
   });

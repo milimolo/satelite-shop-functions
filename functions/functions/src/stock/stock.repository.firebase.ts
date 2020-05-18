@@ -1,7 +1,6 @@
 import {StockRepository} from "./stock.repository";
 import {Product} from "../models/products/product";
 import * as admin from "firebase-admin";
-import FieldValue = admin.firestore.FieldValue;
 import {Stock} from '../models/stock';
 
 export class StockRepositoryFirebase implements StockRepository{
@@ -20,21 +19,13 @@ export class StockRepositoryFirebase implements StockRepository{
     return admin.firestore();
   }
 
-  async lowerStock(product: Product, amount: number): Promise<void> {
-    const stock = await this.db().doc(`${this.stockPath}/${product.id}`);
-    stock.update({amount: FieldValue.increment(-amount) }).then(function() {
-      console.log("Document successfully updated!");
-    })
-      .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-    return Promise.resolve();
-  }
-
   async updateStock(productID: string, stock: Stock): Promise<any> {
     const stockRef = this.db().collection('Stock').doc(productID);
-    await stockRef.update(stock);
+    await stockRef.update({
+      model: stock.model,
+      brand: stock.brand,
+      count: stock.count
+    });
     return Promise.resolve();
   }
 
@@ -44,6 +35,7 @@ export class StockRepositoryFirebase implements StockRepository{
     await docRef.get().then( doc => {
       if (doc.exists) {
         stock = doc.data() as Stock;
+        stock.productId = doc.id;
       }
     }).catch(error => {
       //throw new TypeError('Could not retrieve document');
