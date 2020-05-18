@@ -1,18 +1,15 @@
-import {ProductRepository} from '../../src/products/product.repository';
 import {ProductService} from '../../src/products/product.service';
 import {StockRepository} from "../../src/stock/stock.repository";
 import {TestHelper} from "../helpers/test.helper";
-import {IMock, Mock} from 'moq.ts';
-import {Stock} from "../../src/models/stock";
+import {IMock} from 'moq.ts';
 
 describe('ProductService', () => {
-  let productRepository: IMock<ProductRepository>;
+  // let productRepository: IMock<ProductRepository>;
   let stockRepo: IMock<StockRepository>;
   let productService: ProductService;
-  let testHelper: TestHelper;
+  let testHelper = new TestHelper();
   beforeEach(() => {
-      testHelper = new TestHelper();
-      productRepository = new Mock<ProductRepository>()
+      // productRepository = new Mock<ProductRepository>();
       stockRepo = testHelper.getStockRepositoryMock();
       productService = new ProductService(stockRepo.object());
   });

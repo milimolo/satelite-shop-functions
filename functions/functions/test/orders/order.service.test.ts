@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-implicit-dependencies
-import {IMock, Times} from "moq.ts";
+import {IMock} from "moq.ts";
 import {OrderService} from "../../src/orders/order.service";
 import {TestHelper} from "../helpers/test.helper";
 import {OrderRepository} from "../../src/orders/order.repository";
@@ -9,9 +9,8 @@ import {StockRepository} from "../../src/stock/stock.repository";
     let stockRepository: IMock<StockRepository>;
     let orderRepository: IMock<OrderRepository>;
     let orderService: OrderService;
-    let testHelper: TestHelper;
+    let testHelper = new TestHelper();
     beforeEach(() => {
-        testHelper = new TestHelper();
         orderRepository = testHelper.getOrderRepositoryMock();
         stockRepository = testHelper.getStockRepositoryMock();
         orderService = new OrderService(orderRepository.object(), stockRepository.object());

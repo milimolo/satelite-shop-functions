@@ -11,20 +11,24 @@ export class OrderService{
   }
 
   removeStock(order: Order): Promise<any> {
-    order.orderLines.forEach(orderLine => {
-      const stockPromise = this.stockRepo.getStockByID(orderLine.product.id);
-      stockPromise.then(stock => {
-        if (stock) {
-          this.subtrackAmountFromStock(stock, orderLine.amount);
-          return this.stockRepo.updateStock(orderLine.product.id, stock);
-        }else {
-          return null;
-        }
-      }).catch(error => {
-        throw new TypeError(error);
-      })
-    });
-    return Promise.resolve();
+    if (order.orderLines.length > 0) {
+      order.orderLines.forEach(orderLine => {
+        const stockPromise = this.stockRepo.getStockByID(orderLine.product.id);
+        stockPromise.then(stock => {
+          if (stock) {
+            this.subtrackAmountFromStock(stock, orderLine.amount);
+            return this.stockRepo.updateStock(orderLine.product.id, stock);
+          }else {
+            return null;
+          }
+        }).catch(error => {
+          throw new TypeError(error);
+        })
+      });
+      return Promise.resolve();
+    } else {
+      throw new TypeError('You need an order line to execute an order');
+    }
   }
 
   renameStocks(productBefore: Product, productAfter: Product): Promise<any> {
