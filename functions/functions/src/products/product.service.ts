@@ -4,7 +4,7 @@ import {Product} from "../models/products/product";
 
 export class ProductService {
 
-  private defaultStockCount: number = 5;
+  private defaultStockCount: number = 3;
   constructor(private stockRepo: StockRepository) {}
   async create(product: Product): Promise<any> {
     const stock = this.createStock(product);
@@ -12,7 +12,7 @@ export class ProductService {
     return Promise.resolve(stock);
   }
 
-  private createStock(product: Product): Stock {
+  createStock(product: Product): Stock {
     const stock: Stock = {
       productId: product.id,
       model: product.model,
