@@ -57,4 +57,9 @@ export class StockRepositoryFirebase implements StockRepository{
     });
     return Promise.resolve();
   }
+
+  async deleteStock(product: Product): Promise<any> {
+    const stockCollection = this.db().collection('Stock');
+    return await stockCollection.doc(product.id).delete();
+  }
 }

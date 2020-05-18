@@ -12,4 +12,10 @@ export class ProductControllerFirebase implements ProductController {
     product.id = snap.id;
     return this.productService.create(product);
   }
+
+  delete(snap: DocumentSnapshot, context: EventContext): Promise<any> {
+    const product = snap.data() as Product;
+    product.id = snap.id;
+    return this.productService.delete(product);
+  }
 }

@@ -21,4 +21,8 @@ export class ProductService {
     };
     return stock;
   }
+
+  delete(product: Product): Promise<any> {
+    return this.stockRepo.deleteStock(product);
+  }
 }

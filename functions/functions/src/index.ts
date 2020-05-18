@@ -24,3 +24,15 @@ exports.createStockOnNewFuel = functions.firestore
   .onCreate((snapshot, context) => {
     return difa.getProductController().create(snapshot, context);
   });
+
+exports.deleteStockOnDeleteStallite = functions.firestore
+  .document('Satellites/{id}')
+  .onDelete((snapshot, context) => {
+    return difa.getProductController().delete(snapshot, context);
+  });
+
+exports.deleteStockOnDeleteFuel = functions.firestore
+  .document('Fuel/{id}')
+  .onDelete((snapshot, context) => {
+    return difa.getProductController().delete(snapshot, context);
+  });

@@ -6,4 +6,5 @@ export interface StockRepository {
   getStockByID(productID: string): Promise<Stock>;
   renameStocks(productBefore: Product, productAfter: Product): Promise<any>;
   updateStock(productID: string, stock: Stock): Promise<any>;
+  deleteStock(product: Product): Promise<any>;
 }

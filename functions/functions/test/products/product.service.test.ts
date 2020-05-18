@@ -19,6 +19,7 @@ describe('ProductService', () => {
   it('When making new product, it should make a stock document for the product.', async () => {
     const product = testHelper.getProduct1();
     const stock = productService.createStock(product);
+    
   });
 
 
