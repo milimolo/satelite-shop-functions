@@ -2,13 +2,14 @@ import {ProductController} from './product.controller';
 import {ProductService} from './product.service';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {EventContext} from 'firebase-functions';
-import {Stock} from '../models/stock';
+import {Product} from "../models/products/product";
 
 export class ProductControllerFirebase implements ProductController {
 
   constructor(private productService: ProductService) { }
   create(snap: DocumentSnapshot, context: EventContext): Promise<any> {
-    const stock = snap.data() as Stock;
-    return this.productService.create(stock);
+    const product = snap.data() as Product;
+    product.id = snap.id;
+    return this.productService.create(product);
   }
 }
