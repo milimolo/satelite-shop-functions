@@ -8,12 +8,6 @@ import {Product} from '../models/products/product';
 export class OrderControllerFirebase implements OrderController{
   constructor(private orderService: OrderService) {}
 
-  addStock(snapshot: DocumentSnapshot, context: EventContext): Promise<any> {
-    const product = snapshot.data() as Product;
-    product.id = snapshot.id;
-    return this.orderService.addStock(product);
-  }
-
   removeStock(snapshot: DocumentSnapshot, context: EventContext): Promise<any> {
     const order = snapshot.data() as Order;
     return this.orderService.removeStock(order);
