@@ -6,10 +6,10 @@ import {IMock, Mock} from 'moq.ts';
 import {Stock} from "../../src/models/stock";
 
 describe('ProductService', () => {
-  let testHelper: TestHelper;
   let productRepository: IMock<ProductRepository>;
   let stockRepo: IMock<StockRepository>;
   let productService: ProductService;
+  let testHelper: TestHelper;
   beforeEach(() => {
       testHelper = new TestHelper();
       productRepository = new Mock<ProductRepository>()

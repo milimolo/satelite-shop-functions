@@ -5,11 +5,11 @@ import {TestHelper} from "../helpers/test.helper";
 import {OrderRepository} from "../../src/orders/order.repository";
 import {StockRepository} from "../../src/stock/stock.repository";
 
-describe('OrderService', () => {
-    let testHelper: TestHelper;
+ describe('OrderService', () => {
     let stockRepository: IMock<StockRepository>;
     let orderRepository: IMock<OrderRepository>;
     let orderService: OrderService;
+    let testHelper: TestHelper;
     beforeEach(() => {
         testHelper = new TestHelper();
         orderRepository = testHelper.getOrderRepositoryMock();
