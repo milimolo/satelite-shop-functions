@@ -17,9 +17,9 @@ import {StockRepository} from "../../src/stock/stock.repository";
     });
 
     it('OrderService needs a orderRepository and a stockRepository', () => {
-        orderService = new OrderService(orderRepository.object(), stockRepository.object());
-        expect(orderService).toBeDefined()
-    });
+     orderService = new OrderService(orderRepository.object(), stockRepository.object());
+     expect(orderService).toBeDefined()
+   });
 
 
     it('When Executing order I need atleast 1 orderline', () => {
@@ -29,11 +29,5 @@ import {StockRepository} from "../../src/stock/stock.repository";
         expect(() => {orderService.removeStock(order)}).toThrow('You need an order line to execute an order');
     });
 
-    /*it('When I execute an order, stock should go down with the correct amount of products bought with a orderline count of 1', async () => {
-        const order = testHelper.getOrder1();
-        const orderAfterExecute = await orderService.deployOrder(order);
-        stockRepository.verify(stockRepo => stockRepo.lowerStock(order.orderLines[0].product, order.orderLines[0].amount),
-            Times.Exactly(1));
-        expect(orderAfterExecute).toBeDefined();
-    });*/
+
 });
