@@ -13,9 +13,9 @@ export class OrderControllerFirebase implements OrderController{
     return this.orderService.removeStock(order);
   }
 
-  renameStock(snapshot: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
+  renameProductsInOrderLines(snapshot: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
     const productBefore = snapshot.before.data() as Product;
     const productAfter = snapshot.after.data() as Product;
-    return this.orderService.renameStocks(productBefore, productAfter);
+    return this.orderService.renameProductsInOrderLines(productBefore, productAfter);
   }
 }

@@ -25,4 +25,8 @@ export class ProductService {
   delete(product: Product): Promise<any> {
     return this.stockRepo.deleteStock(product);
   }
+
+  renameModelStock(productBefore: Product, productAfter: Product): Promise<any> {
+    return this.stockRepo.renameModelStocks(productBefore, productAfter);
+  }
 }

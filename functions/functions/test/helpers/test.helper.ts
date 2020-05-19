@@ -32,6 +32,7 @@ export class TestHelper {
     };
 
     order1: Order = {
+      orderId: 'id 1',
         orderLines: [{
           product: this.product1,
           amount: 1,

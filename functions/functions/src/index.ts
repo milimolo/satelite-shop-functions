@@ -36,3 +36,23 @@ exports.deleteStockOnDeleteFuel = functions.firestore
   .onDelete((snapshot, context) => {
     return difa.getProductController().delete(snapshot, context);
   });
+
+exports.renameModelsSatellite = functions.firestore
+  .document('Satellites/{id}')
+  .onUpdate((snapshot, context) => {
+    difa.getOrderController().renameProductsInOrderLines(snapshot, context).then(success => {
+      return difa.getProductController().renameModelOnStocks(snapshot, context);
+    }).catch(error => {
+      throw new TypeError(error);
+    });
+  });
+
+exports.renameModelsFuel = functions.firestore
+  .document('Fuel/{id}')
+  .onUpdate((snapshot, context) => {
+    difa.getOrderController().renameProductsInOrderLines(snapshot, context).then(success => {
+      return difa.getProductController().renameModelOnStocks(snapshot, context);
+    }).catch(error => {
+      throw new TypeError(error);
+    });
+  });

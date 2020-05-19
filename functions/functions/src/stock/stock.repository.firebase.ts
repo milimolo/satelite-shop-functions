@@ -43,7 +43,7 @@ export class StockRepositoryFirebase implements StockRepository{
     return Promise.resolve(stock);
   }
 
-  async renameStocks(productBefore: Product, productAfter: Product): Promise<any> {
+  async renameModelStocks(productBefore: Product, productAfter: Product): Promise<any> {
     const stockCollection = this.db().collection('Stock');
     const snapshot = await stockCollection.get();
     snapshot.forEach(doc => {

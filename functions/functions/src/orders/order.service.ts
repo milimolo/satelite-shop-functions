@@ -31,10 +31,6 @@ export class OrderService{
     }
   }
 
-  renameStocks(productBefore: Product, productAfter: Product): Promise<any> {
-    return this.stockRepo.renameStocks(productBefore, productAfter);
-  }
-
   subtrackAmountFromStock(stock: Stock, amount: number): void {
     const newAmount = stock.count - amount;
     if (newAmount >= 0) {
@@ -42,5 +38,9 @@ export class OrderService{
     } else {
       stock.count = 0;
     }
+  }
+
+  renameProductsInOrderLines(productBefore: Product, productAfter: Product): Promise<any> {
+    return this.orderRepo.renameProductsInOrderLines(productBefore, productAfter);
   }
 }
